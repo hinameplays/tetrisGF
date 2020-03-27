@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>10</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>World
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>10</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Actor
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>70</y>
+      <w>200</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>Blocks
+--
++int blockID
+-String blockname
+-bool drawable
+-int state
+--
+void split()
+void killParent(Target parent)
+void killChild(Target child)
+void update()
+bool getDrawData()
+--
+Responsibilities
+--defines what a block is</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>450</y>
+      <w>210</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>RenEngine
+--
+-runtime: float
+-id: int
+-focus: int
+--
+void DESTROY(int blockID)
+void removeLine()
+void spawn(int blockID)
+void update()
+float getRuntime()
+
+void LOIC(Target focus)
+--
+Responsibilities
+-- make 'em
+-- draw 'em
+-- destroy 'em</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>80</y>
+      <w>310</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>Listener
+--
++int awaitOn
++int outputOn
+-String outFile
+-String logFile
++bool listening
++bool interfaced
+--
+void meta()
+void reset()
+file logFile()
+file outFile()
+void interfaceData()
+void receive(String data)
+void send(data d, String data)
+--
+Responsibilities
+-- waits for stuff to happen and acts accordingly</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>110</x>
+      <y>360</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>60</x>
+      <y>30</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>310</x>
+      <y>560</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>gameData
+--
+float runtime
+int highscore
+Settings settings
+bg=gray
+fg=red
+--
+lives either on stack or in json</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>520</x>
+      <y>550</y>
+      <w>200</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Interface
+--
+setData(Target position, data)
+getData(Target position)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>470</y>
+      <w>520</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+&lt;&lt;Communication&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>430</y>
+      <w>210</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>GameDataHandler
+--
+-Data Position
+--
+int remove(Target target)
+int add(Data data)
+int mod(Target target, Data data)
+data getPosition(String dataName)
+
+
+--
+Responsibilities
+--handels data througput</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>320</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Helper
+--
+-int type
++bool isMeta</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>350</y>
+      <w>250</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>350</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>190.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>320</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>MenuHelper
+--
+void updateUI()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>960</x>
+      <y>320</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Menus
+--
+Contain Settings etc.
+bg=gray
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>920</x>
+      <y>350</y>
+      <w>60</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>320</y>
+      <w>250</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>410</x>
+      <y>80</y>
+      <w>200</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>hinGDX.special
+--
+the 'Secret Sauce'
+contains global helper content
+like Data or Target types
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>30</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>920</x>
+      <y>470</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+&lt;&lt;Access&gt;&gt;</panel_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1020</x>
+      <y>460</y>
+      <w>170</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Stack
+--
+contains runtime variables</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
