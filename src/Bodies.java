@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import org.json.*;
+import java.io.*;
 
 /**
  * Diese Klasse dient dem Handling und dem Spawnen neuer Einzelblöcke, die 
@@ -24,15 +25,7 @@ public class Bodies extends UIElement
      * Act - do whatever the Bodies wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void generateJSON(){
-        public JSONWriter(java.io.Writer mW);
-        
-        new JSONWriter(mW)
-            .object()
-                .key("JSON")
-                .value("Hello, World!")
-            .endObject();
-    }
+    
     public void act() 
     {
         // Add your action code here.
