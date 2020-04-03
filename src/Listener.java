@@ -10,12 +10,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Listener extends World
 {
-    
+    public boolean on = true;
     public Listener()
     {   
         //creates new listener w/ greenfoot propertys
-        super(400, 600, 1); 
+        //die Werte müssen erstmal so bleiben, da noch keine Sprites mit 
+        //Scaling existieren
+        super(16, 24, 25); 
         
+    }
+    public void drawGrid(){
+        if (on) {
+            
+        }
     }
     
 }
