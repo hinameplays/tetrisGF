@@ -37,6 +37,7 @@ public class Listener extends World
     private void prepare()
     {
         this.setBackground("background.png");
-        Greenfoot.setSpeed(40);
+        Greenfoot.setSpeed(20);
+               
     }
 }

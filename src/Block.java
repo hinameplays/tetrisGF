@@ -11,14 +11,19 @@ public class Block extends Actor
 {
     private int fallStep = 0;
     private int execTime = 0;
+    public boolean movable = true;
     
     public void setImg(String type) {
         this.setImage(type+"-block.jpg");
     }
     
-    public Boolean testMov() {
-        //Implementation mit override
-        return false;
+    public void testMov() {
+        Actor a = getOneObjectAtOffset​(0, 1, null);
+        if (a!=null||this.getY()>=22||RenEngine.STOP) {
+            this.movable = false;
+        } else {
+            this.movable = true;
+        }
     }
     
     public void move(String d) {
@@ -49,12 +54,13 @@ public class Block extends Actor
             }
             
         } else { 
-            fallStep += 1 * execTime/200; 
+            fallStep += 1 + execTime/200; 
             execTime +=1; 
             Greenfoot.delay(2);
         }
         if (fallStep%5==0) {
-            if(testMov()) {
+            this.testMov();
+            if(movable) {
                 fallStep = 0;
                 this.setLocation(this.getX(), this.getY()+1);
             }
@@ -62,14 +68,10 @@ public class Block extends Actor
        
     }
     
-      
-    
     public void act() {
-        while (testMov()) {
-            fall();
-        }
-        if (!testMov()) {
-            //spawnTet();
+        this.fall();
+        if (!movable) {
+            RenEngine.spawnTet();
         }
     }    
 }

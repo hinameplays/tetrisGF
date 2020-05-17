@@ -6,9 +6,9 @@ import greenfoot.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class RenEngine  
+public class RenEngine 
 {
-    public static boolean focussed = false;
+    public static boolean STOP = false;
 
     static void spawnTet(){
         int type = Greenfoot.getRandomNumber(7);
@@ -97,15 +97,6 @@ public class RenEngine
             default:
                 Greenfoot.stop();
             
-        }
-    }
-        
-        
-    public static void run() {
-        while (Listener.on) {
-            if(!focussed) {
-                spawnTet();
-            }
         }
     }
 }

@@ -9,11 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class LRblock extends Block
 {
     final String t = "lr";
-    @Override
-    public Boolean testMov() {
-        //Implementation mit override
-        return false;
-    }
+    
     @Override
     public void move(String d) {
         //Implementation mit override
@@ -28,6 +24,6 @@ public class LRblock extends Block
      */
     public void act() 
     {
-        // Add your action code here.
+        this.fall();
     }    
 }
