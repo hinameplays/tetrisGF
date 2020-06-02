@@ -17,15 +17,16 @@ public class Listener extends World
     {   
         //creates new listener w/ greenfoot propertys
         //die Werte müssen erstmal so bleiben, da noch keine Sprites mit 
-        //Scaling existieren
-        super(16, 24, 25); 
+        //Scaling existieren :(
+        super(400, 600, 1); 
 
         prepare();
         w = this;
         
+        
     }
     
-    // returns the current world
+    // gibt die Welt mit allen Objekten wieder
     static Listener getWorld() {
         return w;
     }
@@ -37,7 +38,6 @@ public class Listener extends World
     private void prepare()
     {
         this.setBackground("background.png");
-        Greenfoot.setSpeed(20);
-               
+        Greenfoot.setSpeed(40);     
     }
 }

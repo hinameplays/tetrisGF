@@ -10,14 +10,7 @@ public class ZRblock extends Block
 {
     final String t = "zr";
    
-    @Override
-    public void move(String d) {
-        //Implementation mit override
-    }
-    @Override
-    public void rotate() {
-        //Implementation mit override
-    }
+    
     /**
      * Act - do whatever the ZRblock wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.

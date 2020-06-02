@@ -10,14 +10,7 @@ public class Oblock extends Block
 {
     final String t = "o";
     
-    @Override
-    public void move(String d) {
-        //Implementation mit override
-    }
-    @Override
-    public void rotate() {
-        //Ich bin ein Viereck, wieso sollte mich irgendwer drehen wollen?
-    }    
+  
     /**
      * Act - do whatever the Oblock wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
