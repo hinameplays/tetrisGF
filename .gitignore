@@ -1,2 +1,3 @@
-
+*.ctxt
 src/doc/*
+*.class
