@@ -206,36 +206,30 @@ public class Structure extends Actor
         
         switch(s){
             case 1: // i block
-                switch(h.orientation){ //depending on previous rotation, turn 90 degrees
-                    case 1:
-                        h.setLocation(h.getX()+2, h.getY()-2);
-                        j.setLocation(j.getX()+1, j.getY()-1);
-                        l.setLocation(l.getX()-1, l.getY()+1);
-                    case 2:
-                        h.setLocation(h.getX()+2, h.getY()+2);
-                        j.setLocation(j.getX()+1, j.getY()+1);
-                        l.setLocation(l.getX()-1, l.getY()-1);
-                    case 3:
-                        h.setLocation(h.getX()-2, h.getY()+2);
-                        j.setLocation(j.getX()-1, j.getY()+1);
-                        l.setLocation(l.getX()+1, l.getY()-1);
-                    case 4:
-                        h.setLocation(h.getX()-2, h.getY()-2);
-                        j.setLocation(j.getX()-1, j.getY()-1);
-                        l.setLocation(l.getX()+1, l.getY()+1);
-                    default:
-                        // unreachable statement, ignore
-                        
+                //depending on previous rotation, turn 90 degrees
+                if(h.orientation == 1){
+                    h.setLocation(h.getX()+2, h.getY()-2);
+                    j.setLocation(j.getX()+1, j.getY()-1);
+                    l.setLocation(l.getX()-1, l.getY()+1);
+                } else if(h.orientation == 2){
+                    h.setLocation(h.getX()+2, h.getY()+2);
+                    j.setLocation(j.getX()+1, j.getY()+1);
+                    l.setLocation(l.getX()-1, l.getY()-1);
+                } else if(h.orientation == 3){
+                    h.setLocation(h.getX()-2, h.getY()+2);
+                    j.setLocation(j.getX()-1, j.getY()+1);
+                    l.setLocation(l.getX()+1, l.getY()-1);
+                } else if(h.orientation == 4) {
+                    h.setLocation(h.getX()-2, h.getY()-2);
+                    j.setLocation(j.getX()-1, j.getY()-1);
+                    l.setLocation(l.getX()+1, l.getY()+1);
                 }
+                
                 for (Block block : CurrentBlocks) {
                     if (block.orientation == 4) {
                         block.orientation = block.orientation ++;
                     } else { block.orientation = 1; }
                 }
-            
-                
-            default: // ignore, unreachable statement
-                return;
                 
         }
     }
