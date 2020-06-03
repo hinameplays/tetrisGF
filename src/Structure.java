@@ -21,6 +21,7 @@ public class Structure extends Actor
     /*
      * These Settings are needed for an Authentic NES Tetris Feel, which this game is trying to replicate.
      * They may be tweaked to the users liking for hypertap-emulation.
+     * Lookup specific code explanations to get a better understanding, of how Tetris was designed around these
      */
     
     private int BlockFallTimer = 60, Score = 0;
@@ -86,33 +87,69 @@ public class Structure extends Actor
     }
     
     private void shiftAllLeft() {
+        boolean leftable = true;
         for (Block b : CurrentBlocks) {
-            if (b.canGoLeft()) {
-                b.goLeft();
-            } // Go left, dont do anything else.
+            if (!b.canGoLeft(CurrentBlocks)) {
+                leftable = false;
+            } 
+        } // Go left, dont do anything else.
+        
+        if (leftable) {
+            for (Block b : CurrentBlocks) {
+                b.goLeft(CurrentBlocks);
+            }
         }
     }
            
     private void shiftAllRight() {
+        boolean rightable = true;
         for (Block b : CurrentBlocks) {
-            if (b.canGoRight()) {
-                b.goRight();
-            } // Go left, dont do anything else.
+            if (!b.canGoRight(CurrentBlocks)) {
+                rightable=false;
+            }
+        }// Go right, dont do anything else.
+        
+        if (rightable) {
+            for (Block b : CurrentBlocks) {
+                b.goRight(CurrentBlocks);
+            }
         }
     }
     
     private void fallOnce() {
+        boolean fallable=true;
         try {
             for (Block b : CurrentBlocks) {
-                if (b.canFall(CurrentBlocks)) {
-                    b.fall(CurrentBlocks);
-                } else {
-                    ((TetrisScreen)getWorld()).saveStaticBlock(b);
-                    CurrentBlocks.remove(b);
+                if (!b.canFall(CurrentBlocks)) {
+                    fallable = false;
                 }
                     
             }
-        } catch (Exception e) {}
+            for (Block b : CurrentBlocks) {
+                if (!fallable) {
+                    ((TetrisScreen)getWorld()).saveStaticBlock(b);
+                    CurrentBlocks.remove(b);
+                } else {
+                    b.fall(CurrentBlocks);
+                }
+            }
+        } catch (Exception e) {
+            while (true) {
+                try{
+                    for (Block b : CurrentBlocks) {
+                    
+                        ((TetrisScreen)getWorld()).saveStaticBlock(b);
+                        CurrentBlocks.remove(b);
+                    
+                    }
+                    break;
+                } catch (Exception g) {}
+            }
+        }
+        if (!fallable) {
+            spawnStructure();
+            Greenfoot.delay(2);
+        }
     }
 
     public void blockFalling() {
@@ -131,7 +168,8 @@ public class Structure extends Actor
     public void spawnStructure() {
         int type = Greenfoot.getRandomNumber(7);
         StructureBlocks = getSpawnList(type);
-        System.out.println(StructureBlocks);
+        //System.out.println(StructureBlocks);
+        CurrentBlocks.clear();
         for (Block b : StructureBlocks) {
             CurrentBlocks.add(b);
             getWorld().addObject(b,b.getInitX(), b.getInitY());
@@ -140,7 +178,7 @@ public class Structure extends Actor
     
     private List<Block> getSpawnList(int StructureNumber) {
         List<Block> BlockList = new ArrayList<Block>();
-        switch (StructureNumber) {
+        switch (StructureNumber) { //switch  based on RNG from upward
             case 0: // i block
                 BlockList.add(new Block(4,1,1));
                 BlockList.add(new Block(5,1,1));
@@ -181,16 +219,16 @@ public class Structure extends Actor
                 BlockList.add(new Block(6,2,7));
                 BlockList.add(new Block(7,2,7));
                 BlockList.add(new Block(5,1,7));
-                BlockList.add(new Block(6,2,7));
+                BlockList.add(new Block(6,1,7));
                 break;
-            default: // just an extra i block, thats always good. Ofc this should never happen
+            default: // just an extra i block, thats always good. Ofc this should never happen, but does, tf?
                 BlockList.add(new Block(4,1,1));
                 BlockList.add(new Block(5,1,1));
                 BlockList.add(new Block(6,1,1));
                 BlockList.add(new Block(7,1,1));
                 break;
         }
-        System.out.println(BlockList);
+        //System.out.println(BlockList); //debug statement, enable if wrong things get spawned
         return BlockList;
     }
 }

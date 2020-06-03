@@ -49,29 +49,50 @@ public class Block extends Actor
             }
     }
     
-    public boolean canGoLeft() {
-        if (getObjectsAtOffset(-1,0,null).isEmpty()) {
+    public boolean canGoLeft(List<Block> CurrentBlocks) {
+        List<Object> f = getObjectsAtOffset(-1, 0, null);
+        for (Block n : CurrentBlocks) {
+            if(f.contains(n)&&n.getX()!=1) {
+                f.remove(n);
+            }
+        }
+        
+        if (f.isEmpty()) {
             if (getX() != 1) return true;
         } return false;
     }
     
-    public void goLeft() {
-        if (canGoLeft()) setLocation(getX()-1, getY());
+    public void goLeft(List<Block> CurrentBlocks) {
+               
+        if (canGoLeft(CurrentBlocks)) setLocation(getX()-1, getY());
     }
     
-    public boolean canGoRight() {
-        if (getObjectsAtOffset(1,0,null).isEmpty()) {
+    public boolean canGoRight(List<Block> CurrentBlocks) {
+        List<Object> f = getObjectsAtOffset(1, 0, null);
+        for (Block n : CurrentBlocks) {
+            if(f.contains(n)&&n.getX()!=10) {
+                f.remove(n);
+            }
+        }
+        if (f.isEmpty()) {
             if (getX() != 10) return true;
         } return false;
     }
     
-    public void goRight() {
-        if (canGoRight()) setLocation(getX()+1, getY());
+    public void goRight(List<Block> CurrentBlocks) {
+        if (canGoRight(CurrentBlocks)) setLocation(getX()+1, getY());
     }
     
     public boolean canFall(List<Block> CurrentBlocks) {
-        if (getObjectsAtOffset(0, 1, null).isEmpty() || CurrentBlocks.contains(getObjectsAtOffset(0, 1, null))) {
-            if (getY() != 23) return true;
+        List<Object> f = getObjectsAtOffset(0, 1, null);
+        for (Block n : CurrentBlocks) {
+            if(f.contains(n)&&n.getY()!=23) {
+                f.remove(n);
+            }
+        }
+        
+        if (f.isEmpty()){
+            if (getY() != 23) {return true;}
         } return false;
     }
     

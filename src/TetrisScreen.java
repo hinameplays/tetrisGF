@@ -32,9 +32,6 @@ public class TetrisScreen extends World
     
     public void addBlocks() {
         structureMaker.spawnStructure();
-        //Block firstBlock = new Block(5,1,0);
-        //CurrentBlocks.add(firstBlock);
-        //addObject(firstBlock,5,1);
     }
     
     public void act() {
@@ -54,6 +51,12 @@ public class TetrisScreen extends World
     
     public void saveStaticBlock(Block block) {
         BlockList.add(block);
+    }
+    
+    public void remLine(){
+        for (Block b : BlockList) {
+            
+            }
     }
     
     public void pleaseAddActor(Actor a, int x, int y){
