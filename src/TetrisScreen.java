@@ -11,9 +11,7 @@ import java.util.*;
  */
 public class TetrisScreen extends World
 {
-    public boolean debug = true;
-    private TetrisScreen Tet;
-    
+    public boolean debug = true;    
     
     private boolean gameRunning = false, gameOver = false;
     private List<Block> BlockList = new ArrayList<Block>(); //Stores all static Blocks
@@ -82,9 +80,8 @@ public class TetrisScreen extends World
     
     
     void clearRow(int row) {
-        TetrisScreen world = Tet;
         for (int c = 0; c < 10; c++) {
-            world.removeObjects(world.getObjectsAt(c+1, row+1, Block.class)); // removes the blocks of a row
+            removeObjects(getObjectsAt(c+1, row+1, Block.class)); // removes the blocks of a row
         }
     }
     
@@ -102,9 +99,8 @@ public class TetrisScreen extends World
     
     // checks whether the game has completed
     private void checkRunning() {
-        TetrisScreen world = Tet;
         for (int i = 0; i < 10; i++) {
-            java.util.List l = world.getObjectsAt(1+i, 1, Block.class);
+            java.util.List l = getObjectsAt(1+i, 1, Block.class);
             if (l.size() >= 1) {
                 gameRunning = false;
                 Greenfoot.stop();
