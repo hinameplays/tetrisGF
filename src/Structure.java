@@ -34,7 +34,7 @@ public class Structure extends Actor
         if (Greenfoot.isKeyDown("UP")) {
             if (!KeyStorageUp) {
                 rotate();
-                KeyStorageUp = false; // Set this to true for DAS cooldown
+                KeyStorageUp = true; // Set this to true for DAS cooldown
             } else if (KeyCooldownUp == 0) {
                 if (AutoRepeatSpeedUp == 0) {
                     rotate();
