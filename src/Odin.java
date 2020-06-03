@@ -14,21 +14,9 @@ public class Odin extends Actor
     public static void spawnOdin() {
         int g = Greenfoot.getRandomNumber(7);
         int xe = Greenfoot.getRandomNumber(5);
-        Listener w = Listener.getWorld();
         Odin aO;
         
-        switch(g){
-        case 0:
-            aO = new IOdin();
-            
-        case 1:
-            aO= new TOdin();
-        
-        default:
-            aO = new IOdin();
-          
-        }
-        w.addObject(aO,xe*25+112, 75);
+        //w.addObject(aO,xe*25+112, 75);
     }
     
     public void act() 
