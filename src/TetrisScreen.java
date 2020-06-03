@@ -44,8 +44,6 @@ public class TetrisScreen extends World
         if (gameRunning) {
             structureMaker.blockFalling();
             structureMaker.playerInputs();
-            
-            Tet = this;
             checkRows();
         }
         
@@ -63,11 +61,10 @@ public class TetrisScreen extends World
     void checkRows() { // checks whether there exists completed rows which can be removed
         int rows = 0;
         int found = 0;
-        TetrisScreen world = Tet;
         
         for (int r = 0; r<=23; r++) { //iterate rows
             for (int c = 0; c<=10; c++) { //iterate cols
-                java.util.List l = world.getObjectsAt(c+1, r+1, Block.class);
+                java.util.List l = getObjectsAt(c+1, r+1, Block.class);
                 if (l.size() != 0) {
                     found ++;
                 }
@@ -92,10 +89,9 @@ public class TetrisScreen extends World
     }
     
     void pushDown(int row) {
-        TetrisScreen world = Tet;
         for (int r = row; r >= 0; r--) {
             for (int c = 0; c < 10; c++) {
-                java.util.List blocks = world.getObjectsAt(c, r, Block.class);
+                java.util.List blocks = getObjectsAt(c, r, Block.class);
                 if (blocks.size() > 0) {
                     Block block = (Block) blocks.get(0);
                     block.setLocation(block.getX(), block.getY() + 1);
@@ -116,9 +112,5 @@ public class TetrisScreen extends World
             }
             
         }
-    }
-    
-    public void pleaseAddActor(Actor a, int x, int y){
-        addObject(a, x, y);
     }
 }
