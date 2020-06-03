@@ -13,13 +13,18 @@ public class Block extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    private int initx,inity;
+    private int initx,inity, type;
     
     public Block(int x, int y, int variation) {
         initx = x; inity = y;
         setBlockTexture(variation);
+        type = variation;
         setLocation(x, y);
     }
+    
+    public int getType() {
+        return type;
+    }      
     
     public void setBlockTexture(int variant) {
         switch (variant) {

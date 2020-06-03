@@ -1,4 +1,5 @@
 #Greenfoot project file
+class.Structure.image=null.jpg
 dependency1.from=TetrisScreen
 dependency1.to=Block
 dependency1.type=UsesDependency
@@ -11,10 +12,10 @@ dependency3.type=UsesDependency
 dependency4.from=Structure
 dependency4.to=TetrisScreen
 dependency4.type=UsesDependency
-editor.fx.0.height=737
-editor.fx.0.width=814
-editor.fx.0.x=360
-editor.fx.0.y=28
+editor.fx.0.height=0
+editor.fx.0.width=0
+editor.fx.0.x=0
+editor.fx.0.y=0
 height=838
 package.numDependencies=4
 package.numTargets=3

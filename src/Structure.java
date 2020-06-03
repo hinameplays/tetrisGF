@@ -3,7 +3,7 @@ import java.util.*;
 
 /**
  * this makes blocks, structures; and can destroy them 
- * also does key processing
+ * also does key input processing
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -16,13 +16,13 @@ public class Structure extends Actor
     private int AutoRepeatSpeed = 10; // The amount of act-cycles it takes for a piece to autoshift with DAS.
     private int AutoRepeatSpeedDownOriginal = 5; // Drop Button is faster than piece shifting.
     
-    private boolean KeyStorageLeft = false, KeyStorageRight = false, KeyStorageDown = false; // Helper variables for Key Cooldown and Repeating
-    private int KeyCooldownLeft = KeyCooldown, KeyCooldownRight = KeyCooldown, KeyCooldownDown = KeyCooldown; 
-    private int AutoRepeatSpeedLeft = AutoRepeatSpeed, AutoRepeatSpeedRight = AutoRepeatSpeed, AutoRepeatSpeedDown = AutoRepeatSpeedDownOriginal;
+    private boolean KeyStorageLeft = false, KeyStorageRight = false, KeyStorageDown = false, KeyStorageUp = false; // Helper variables for Key Cooldown and Repeating
+    private int KeyCooldownLeft = KeyCooldown, KeyCooldownRight = KeyCooldown, KeyCooldownDown = KeyCooldown, KeyCooldownUp = KeyCooldown; 
+    private int AutoRepeatSpeedUp = AutoRepeatSpeedDownOriginal, AutoRepeatSpeedLeft = AutoRepeatSpeed, AutoRepeatSpeedRight = AutoRepeatSpeed, AutoRepeatSpeedDown = AutoRepeatSpeedDownOriginal;
     /*
      * These Settings are needed for an Authentic NES Tetris Feel, which this game is trying to replicate.
      * They may be tweaked to the users liking for hypertap-emulation.
-     * Lookup specific code explanations to get a better understanding, of how Tetris was designed around these
+     * Lookup specific code explanations to get a better understanding of how Tetris was designed around these
      */
     
     private int BlockFallTimer = 60, Score = 0;
@@ -30,6 +30,25 @@ public class Structure extends Actor
     private List<Block> CurrentBlocks = new ArrayList<Block>(); //Stores all moving Blocks
     
     public void playerInputs() { // This input implementation replicates the Nintendo NES Tetris piece movement DAS mechanics.
+        
+        if (Greenfoot.isKeyDown("UP")) {
+            if (!KeyStorageUp) {
+                rotate();
+                KeyStorageUp = false; // Set this to true for DAS cooldown
+            } else if (KeyCooldownUp == 0) {
+                if (AutoRepeatSpeedUp == 0) {
+                    rotate();
+                    AutoRepeatSpeedUp = AutoRepeatSpeedDownOriginal;
+                } else { AutoRepeatSpeedUp--; }
+            } else {
+                KeyCooldownUp--;
+            }
+        } else { // Reset all repeating counters
+            KeyStorageUp = false;
+            KeyCooldownUp = KeyCooldown; 
+            AutoRepeatSpeedUp = AutoRepeatSpeedDownOriginal;
+        }
+        
         if (Greenfoot.isKeyDown("LEFT")) {
             if (!KeyStorageLeft) {
                 shiftAllLeft();
@@ -174,6 +193,22 @@ public class Structure extends Actor
         for (Block b : StructureBlocks) {
             CurrentBlocks.add(b);
             getWorld().addObject(b,b.getInitX(), b.getInitY());
+        }
+    }
+    
+    private void rotate() {
+        
+        Block h = CurrentBlocks.get(0);
+        Block j = CurrentBlocks.get(1);
+        Block k = CurrentBlocks.get(2);
+        Block l = CurrentBlocks.get(3);
+        int s = h.getType();
+        
+        switch(s){
+            case 1: // i block
+                
+            default: // ignore, unreachable statement
+                return;
         }
     }
     
