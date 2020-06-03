@@ -9,8 +9,8 @@ import java.util.*;
 public class Block extends Actor
 {
     
-    private int initx,inity, type;
-    public int orientation, rootX, rootY;
+    private int initx,inity;
+    public int orientation, rootX, rootY, type;
     /*
      * type: 1-i, 2-j, 3-l, 4-owo, 5-s, 6-t, 7-z
      * orientation: 1-start=0, 2-+90, 3-+180, 4-+270
@@ -26,9 +26,6 @@ public class Block extends Actor
         setLocation(x, y);
     }
     
-    public int getType() {
-        return type;
-    }   
     
     public void setBlockTexture(int variant) {
         switch (variant) {
