@@ -8,23 +8,25 @@ import java.util.*;
  */
 public class Block extends Actor
 {
-    /**
-     * Act - do whatever the Piece wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     
     private int initx,inity, type;
+    public int orientation;
+    /*
+     * type: 1-i, 2-j, 3-l, 4-owo, 5-s, 6-t, 7-z
+     * orientation: 1-up, 2-right, 3-down, 4-left
+     */
     
     public Block(int x, int y, int variation) {
         initx = x; inity = y;
         setBlockTexture(variation);
         type = variation;
+        orientation = 1;
         setLocation(x, y);
     }
     
     public int getType() {
         return type;
-    }      
+    }   
     
     public void setBlockTexture(int variant) {
         switch (variant) {
