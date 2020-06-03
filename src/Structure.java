@@ -18,7 +18,7 @@ public class Structure extends Actor
     
     private boolean KeyStorageLeft = false, KeyStorageRight = false, KeyStorageDown = false, KeyStorageUp = false; // Helper variables for Key Cooldown and Repeating
     private int KeyCooldownLeft = KeyCooldown, KeyCooldownRight = KeyCooldown, KeyCooldownDown = KeyCooldown, KeyCooldownUp = KeyCooldown; 
-    private int AutoRepeatSpeedUp = AutoRepeatSpeedDownOriginal, AutoRepeatSpeedLeft = AutoRepeatSpeed, AutoRepeatSpeedRight = AutoRepeatSpeed, AutoRepeatSpeedDown = AutoRepeatSpeedDownOriginal;
+    private int AutoRepeatSpeedUp = AutoRepeatSpeed, AutoRepeatSpeedLeft = AutoRepeatSpeed, AutoRepeatSpeedRight = AutoRepeatSpeed, AutoRepeatSpeedDown = AutoRepeatSpeedDownOriginal;
     /*
      * These Settings are needed for an Authentic NES Tetris Feel, which this game is trying to replicate.
      * They may be tweaked to the users liking for hypertap-emulation.
@@ -38,7 +38,7 @@ public class Structure extends Actor
             } else if (KeyCooldownUp == 0) {
                 if (AutoRepeatSpeedUp == 0) {
                     rotate();
-                    AutoRepeatSpeedUp = AutoRepeatSpeedDownOriginal;
+                    AutoRepeatSpeedUp = AutoRepeatSpeed;
                 } else { AutoRepeatSpeedUp--; }
             } else {
                 KeyCooldownUp--;
@@ -46,7 +46,7 @@ public class Structure extends Actor
         } else { // Reset all repeating counters
             KeyStorageUp = false;
             KeyCooldownUp = KeyCooldown; 
-            AutoRepeatSpeedUp = AutoRepeatSpeedDownOriginal;
+            AutoRepeatSpeedUp = AutoRepeatSpeed;
         }
         
         if (Greenfoot.isKeyDown("LEFT")) {
