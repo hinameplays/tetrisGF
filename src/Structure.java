@@ -11,6 +11,7 @@ import java.util.*;
 public class Structure extends Actor
 {
     private List<Block> StructureBlocks;
+    public boolean fallable=true;
     
     private int KeyCooldown = 30; // The amount of act-cycles before the autorepeating starts
     private int AutoRepeatSpeed = 10; // The amount of act-cycles it takes for a piece to autoshift with DAS.
@@ -137,7 +138,7 @@ public class Structure extends Actor
     }
     
     private void fallOnce() {
-        boolean fallable=true;
+        
         try {
             for (Block b : CurrentBlocks) {
                 if (!b.canFall(CurrentBlocks)) {
@@ -166,10 +167,7 @@ public class Structure extends Actor
                 } catch (Exception g) {}
             }
         }
-        if (!fallable) {
-            spawnStructure();
-            Greenfoot.delay(2);
-        }
+        
     }
 
     public void blockFalling() {
@@ -207,26 +205,41 @@ public class Structure extends Actor
         switch(s){
             case 1: // i block
                 //depending on previous rotation, turn 90 degrees
+                //k is root -> not to be changed
                 if(h.orientation == 1){
-                    h.setLocation(h.getX()+2, h.getY()-2);
-                    j.setLocation(j.getX()+1, j.getY()-1);
-                    l.setLocation(l.getX()-1, l.getY()+1);
+                    h.setLocation(h.rootX, h.rootY-2);
+                    j.setLocation(j.rootX, j.rootY-1);
+                    k.setLocation(k.rootX, k.rootY);
+                    l.setLocation(l.rootX, l.rootY+1);
                 } else if(h.orientation == 2){
-                    h.setLocation(h.getX()+2, h.getY()+2);
-                    j.setLocation(j.getX()+1, j.getY()+1);
-                    l.setLocation(l.getX()-1, l.getY()-1);
+                    h.setLocation(h.rootX+2, h.rootY);
+                    j.setLocation(j.rootX+1, j.rootY);
+                    k.setLocation(k.rootX, k.rootY);
+                    l.setLocation(l.rootX-1, l.rootY);
                 } else if(h.orientation == 3){
-                    h.setLocation(h.getX()-2, h.getY()+2);
-                    j.setLocation(j.getX()-1, j.getY()+1);
-                    l.setLocation(l.getX()+1, l.getY()-1);
+                    h.setLocation(h.rootX, h.rootY+2);
+                    j.setLocation(j.rootX, j.rootY+1);
+                    k.setLocation(k.rootX, k.rootY);
+                    l.setLocation(l.rootX, l.rootY-1);
                 } else if(h.orientation == 4) {
-                    h.setLocation(h.getX()-2, h.getY()-2);
-                    j.setLocation(j.getX()-1, j.getY()-1);
-                    l.setLocation(l.getX()+1, l.getY()+1);
+                    h.setLocation(h.rootX-2, h.rootY);
+                    j.setLocation(j.rootX-1, j.rootY);
+                    k.setLocation(k.rootX, k.rootY);
+                    l.setLocation(l.rootX+1, l.rootY);
                 }
-                
-             
+                if (h.orientation == 4) {
+                    h.orientation = 1;
+                    j.orientation = 1;
+                    k.orientation = 1;
+                    l.orientation = 1;
+                } else {
+                    h.orientation++;
+                    j.orientation++;
+                    k.orientation++;
+                    l.orientation++;
+                }
         }
+        
         CurrentBlocks.set(0, h);
         CurrentBlocks.set(1, j);
         CurrentBlocks.set(2, k);
@@ -237,52 +250,52 @@ public class Structure extends Actor
         List<Block> BlockList = new ArrayList<Block>();
         switch (StructureNumber) { //switch  based on RNG from upward
             case 0: // i block
-                BlockList.add(new Block(4,1,1));
-                BlockList.add(new Block(5,1,1));
-                BlockList.add(new Block(6,1,1));
-                BlockList.add(new Block(7,1,1));
+                BlockList.add(new Block(4,1,1,5,1));
+                BlockList.add(new Block(5,1,1,5,1));
+                BlockList.add(new Block(6,1,1,5,1));
+                BlockList.add(new Block(7,1,1,5,1));
                 break;
             case 1: // j block
-                BlockList.add(new Block(5,1,2));
-                BlockList.add(new Block(5,2,2));
-                BlockList.add(new Block(6,2,2));
-                BlockList.add(new Block(7,2,2));
+                BlockList.add(new Block(5,1,2,5,2));
+                BlockList.add(new Block(5,2,2,5,2));
+                BlockList.add(new Block(6,2,2,5,2));
+                BlockList.add(new Block(7,2,2,5,2));
                 break;
             case 2: // l block
-                BlockList.add(new Block(7,1,3));
-                BlockList.add(new Block(5,2,3));
-                BlockList.add(new Block(6,2,3));
-                BlockList.add(new Block(7,2,3));
+                BlockList.add(new Block(7,1,3,7,2));
+                BlockList.add(new Block(5,2,3,7,2));
+                BlockList.add(new Block(6,2,3,7,2));
+                BlockList.add(new Block(7,2,3,7,2));
                 break;
             case 3: // owo block
-                BlockList.add(new Block(5,1,4));
-                BlockList.add(new Block(5,2,4));
-                BlockList.add(new Block(6,1,4));
-                BlockList.add(new Block(6,2,4));
+                BlockList.add(new Block(5,1,4,5,1));
+                BlockList.add(new Block(5,2,4,5,1));
+                BlockList.add(new Block(6,1,4,5,1));
+                BlockList.add(new Block(6,2,4,5,1));
                 break;
             case 4: // s block
-                BlockList.add(new Block(6,1,5));
-                BlockList.add(new Block(7,1,5));
-                BlockList.add(new Block(5,2,5));
-                BlockList.add(new Block(6,2,5));
+                BlockList.add(new Block(6,1,5,6,1));
+                BlockList.add(new Block(7,1,5,6,1));
+                BlockList.add(new Block(5,2,5,6,1));
+                BlockList.add(new Block(6,2,5,6,1));
                 break;
             case 5: // t block
-                BlockList.add(new Block(6,1,6));
-                BlockList.add(new Block(7,2,6));
-                BlockList.add(new Block(5,2,6));
-                BlockList.add(new Block(6,2,6));
+                BlockList.add(new Block(6,1,6,6,2));
+                BlockList.add(new Block(7,2,6,6,2));
+                BlockList.add(new Block(5,2,6,6,2));
+                BlockList.add(new Block(6,2,6,6,2));
                 break;
             case 6: // z block
-                BlockList.add(new Block(6,2,7));
-                BlockList.add(new Block(7,2,7));
-                BlockList.add(new Block(5,1,7));
-                BlockList.add(new Block(6,1,7));
+                BlockList.add(new Block(6,2,7,6,1));
+                BlockList.add(new Block(7,2,7,6,1));
+                BlockList.add(new Block(5,1,7,6,1));
+                BlockList.add(new Block(6,1,7,6,1));
                 break;
             default: // just an extra i block, thats always good. Ofc this should never happen, but does, tf?
-                BlockList.add(new Block(4,1,1));
-                BlockList.add(new Block(5,1,1));
-                BlockList.add(new Block(6,1,1));
-                BlockList.add(new Block(7,1,1));
+                BlockList.add(new Block(4,1,1,5,1));
+                BlockList.add(new Block(5,1,1,5,1));
+                BlockList.add(new Block(6,1,1,5,1));
+                BlockList.add(new Block(7,1,1,5,1));
                 break;
         }
         //System.out.println(BlockList); //debug statement, enable if wrong things get spawned

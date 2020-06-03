@@ -42,11 +42,16 @@ public class TetrisScreen extends World
         if (gameRunning) {
             structureMaker.blockFalling();
             structureMaker.playerInputs();
-            checkRows();
+            if (!structureMaker.fallable) {
+                checkRows();
+                structureMaker.spawnStructure();
+                structureMaker.fallable = true;
+                Greenfoot.delay(2);
+            }
         }
         
         if (gameOver) {
-            showText("Game Over! restart the Game via UI!",8,12);
+            //showText("Game Over! restart the Game via UI!",8,12);
             
         }
     }

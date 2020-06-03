@@ -10,14 +10,16 @@ public class Block extends Actor
 {
     
     private int initx,inity, type;
-    public int orientation;
+    public int orientation, rootX, rootY;
     /*
      * type: 1-i, 2-j, 3-l, 4-owo, 5-s, 6-t, 7-z
-     * orientation: 1-up, 2-right, 3-down, 4-left
+     * orientation: 1-start=0, 2-+90, 3-+180, 4-+270
+     * rootX&Y define the base of the tetromino
+     * 
      */
     
-    public Block(int x, int y, int variation) {
-        initx = x; inity = y;
+    public Block(int x, int y, int variation, int rx, int ry) {
+        initx = x; inity = y; rootX = rx; rootY = ry;
         setBlockTexture(variation);
         type = variation;
         orientation = 1;
@@ -71,7 +73,10 @@ public class Block extends Actor
     
     public void goLeft(List<Block> CurrentBlocks) {
                
-        if (canGoLeft(CurrentBlocks)) setLocation(getX()-1, getY());
+        if (canGoLeft(CurrentBlocks)) {
+            setLocation(getX()-1, getY());
+            rootX--;
+        }
     }
     
     public boolean canGoRight(List<Block> CurrentBlocks) {
@@ -87,7 +92,10 @@ public class Block extends Actor
     }
     
     public void goRight(List<Block> CurrentBlocks) {
-        if (canGoRight(CurrentBlocks)) setLocation(getX()+1, getY());
+        if (canGoRight(CurrentBlocks)) {
+            setLocation(getX()+1, getY());
+            rootX++;
+        }
     }
     
     public boolean canFall(List<Block> CurrentBlocks) {
@@ -104,7 +112,10 @@ public class Block extends Actor
     }
     
     public void fall(List<Block> CurrentBlocks) {
-        if (canFall(CurrentBlocks)) setLocation(getX(), getY()+1);
+        if (canFall(CurrentBlocks)) {
+            setLocation(getX(), getY()+1);
+            rootY++;
+        }
     }
     
     public int getInitX() { return initx; }
