@@ -1,0 +1,196 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
+
+/**
+ * Write a description of class StructureSpawner here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Structure extends Actor
+{
+    private List<Block> StructureBlocks;
+    
+    private int KeyCooldown = 30; // The amount of act-cycles before the autorepeating starts
+    private int AutoRepeatSpeed = 10; // The amount of act-cycles it takes for a piece to autoshift with DAS.
+    private int AutoRepeatSpeedDownOriginal = 5; // Drop Button is faster than piece shifting.
+    
+    private boolean KeyStorageLeft = false, KeyStorageRight = false, KeyStorageDown = false; // Helper variables for Key Cooldown and Repeating
+    private int KeyCooldownLeft = KeyCooldown, KeyCooldownRight = KeyCooldown, KeyCooldownDown = KeyCooldown; 
+    private int AutoRepeatSpeedLeft = AutoRepeatSpeed, AutoRepeatSpeedRight = AutoRepeatSpeed, AutoRepeatSpeedDown = AutoRepeatSpeedDownOriginal;
+    /*
+     * These Settings are needed for an Authentic NES Tetris Feel, which this game is trying to replicate.
+     * They may be tweaked to the users liking for hypertap-emulation.
+     */
+    
+    private int BlockFallTimer = 60, Score = 0;
+    
+    private List<Block> CurrentBlocks = new ArrayList<Block>(); //Stores all moving Blocks
+    
+    public void playerInputs() { // This input implementation replicates the Nintendo NES Tetris piece movement DAS mechanics.
+        if (Greenfoot.isKeyDown("LEFT")) {
+            if (!KeyStorageLeft) {
+                shiftAllLeft();
+                KeyStorageLeft = true; // Set this to true for DAS cooldown
+            } else if (KeyCooldownLeft == 0) {
+                if (AutoRepeatSpeedLeft == 0) {
+                    shiftAllLeft();
+                    AutoRepeatSpeedLeft = AutoRepeatSpeed;
+                } else { AutoRepeatSpeedLeft--; }
+            } else {
+                KeyCooldownLeft--;
+            }
+        } else { // Reset all repeating counters
+            KeyStorageLeft = false;
+            KeyCooldownLeft = KeyCooldown; 
+            AutoRepeatSpeedLeft = AutoRepeatSpeed;
+        }
+         
+        if (Greenfoot.isKeyDown("RIGHT")) {
+            if (!KeyStorageRight) {
+                shiftAllRight();
+                KeyStorageRight = true; // Set this to true for DAS cooldown
+            } else if (KeyCooldownRight == 0) {
+                if (AutoRepeatSpeedRight == 0) {
+                    shiftAllRight();
+                    AutoRepeatSpeedRight = AutoRepeatSpeed;
+                } else { AutoRepeatSpeedRight--; }
+            } else {
+                KeyCooldownRight--;
+            }
+        } else { // Reset all repeating counters
+            KeyStorageRight = false;
+            KeyCooldownRight = KeyCooldown;
+            AutoRepeatSpeedRight = AutoRepeatSpeed;
+        }
+        
+        if (Greenfoot.isKeyDown("DOWN")) {
+            if (!KeyStorageDown) {
+                fallOnce();
+                KeyStorageDown = true; // Set this to true for DAS cooldown
+            } else if (KeyCooldownDown == 0) {
+                if (AutoRepeatSpeedDown == 0) {
+                    fallOnce();
+                    AutoRepeatSpeedDown = AutoRepeatSpeedDownOriginal;
+                } else { AutoRepeatSpeedDown--; }
+            } else {
+                KeyCooldownDown--;
+            }
+            BlockFallTimer = 40; // This is done in Trey Harrison's NES Tetris Mod to make Hypertap Stalls possible
+        } else { // Reset all repeating counters
+            KeyStorageDown = false;
+            KeyCooldownDown = KeyCooldown;
+            AutoRepeatSpeedDown = AutoRepeatSpeedDownOriginal;
+        }
+            
+    }
+    
+    private void shiftAllLeft() {
+        for (Block b : CurrentBlocks) {
+            if (b.canGoLeft()) {
+                b.goLeft();
+            } // Go left, dont do anything else.
+        }
+    }
+           
+    private void shiftAllRight() {
+        for (Block b : CurrentBlocks) {
+            if (b.canGoRight()) {
+                b.goRight();
+            } // Go left, dont do anything else.
+        }
+    }
+    
+    private void fallOnce() {
+        try {
+            for (Block b : CurrentBlocks) {
+                if (b.canFall(CurrentBlocks)) {
+                    b.fall(CurrentBlocks);
+                } else {
+                    ((TetrisScreen)getWorld()).saveStaticBlock(b);
+                    CurrentBlocks.remove(b);
+                }
+                    
+            }
+        } catch (Exception e) {}
+    }
+
+    public void blockFalling() {
+        BlockFallTimer--;
+        if (BlockFallTimer == 0) {
+            fallOnce();
+            BlockFallTimer = 60;
+        } 
+        getWorld().showText(String.valueOf(BlockFallTimer),3,3);
+    }
+    
+    public List<Block> getCurrentBlocks() {
+        return CurrentBlocks;
+    }
+    
+    public void spawnStructure() {
+        int type = Greenfoot.getRandomNumber(7);
+        StructureBlocks = getSpawnList(type);
+        System.out.println(StructureBlocks);
+        for (Block b : StructureBlocks) {
+            CurrentBlocks.add(b);
+            getWorld().addObject(b,b.getInitX(), b.getInitY());
+        }
+    }
+    
+    private List<Block> getSpawnList(int StructureNumber) {
+        List<Block> BlockList = new ArrayList<Block>();
+        switch (StructureNumber) {
+            case 0: // i block
+                BlockList.add(new Block(4,1,1));
+                BlockList.add(new Block(5,1,1));
+                BlockList.add(new Block(6,1,1));
+                BlockList.add(new Block(7,1,1));
+                break;
+            case 1: // j block
+                BlockList.add(new Block(5,1,2));
+                BlockList.add(new Block(5,2,2));
+                BlockList.add(new Block(6,2,2));
+                BlockList.add(new Block(7,2,2));
+                break;
+            case 2: // l block
+                BlockList.add(new Block(7,1,3));
+                BlockList.add(new Block(5,2,3));
+                BlockList.add(new Block(6,2,3));
+                BlockList.add(new Block(7,2,3));
+                break;
+            case 3: // owo block
+                BlockList.add(new Block(5,1,4));
+                BlockList.add(new Block(5,2,4));
+                BlockList.add(new Block(6,1,4));
+                BlockList.add(new Block(6,2,4));
+                break;
+            case 4: // s block
+                BlockList.add(new Block(6,1,5));
+                BlockList.add(new Block(7,1,5));
+                BlockList.add(new Block(5,2,5));
+                BlockList.add(new Block(6,2,5));
+                break;
+            case 5: // t block
+                BlockList.add(new Block(6,1,6));
+                BlockList.add(new Block(7,2,6));
+                BlockList.add(new Block(5,2,6));
+                BlockList.add(new Block(6,2,6));
+                break;
+            case 6: // z block
+                BlockList.add(new Block(6,2,7));
+                BlockList.add(new Block(7,2,7));
+                BlockList.add(new Block(5,1,7));
+                BlockList.add(new Block(6,2,7));
+                break;
+            default: // just an extra i block, thats always good. Ofc this should never happen
+                BlockList.add(new Block(4,1,1));
+                BlockList.add(new Block(5,1,1));
+                BlockList.add(new Block(6,1,1));
+                BlockList.add(new Block(7,1,1));
+                break;
+        }
+        System.out.println(BlockList);
+        return BlockList;
+    }
+}
