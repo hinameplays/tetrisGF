@@ -2,7 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class StructureSpawner here.
+ * this makes blocks, structures; and can destroy them 
+ * also does key processing
  * 
  * @author (your name) 
  * @version (a version number or a date)

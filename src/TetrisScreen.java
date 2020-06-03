@@ -12,7 +12,7 @@ import java.util.*;
 public class TetrisScreen extends World
 {
     public boolean debug = true;
-    
+    private TetrisScreen Tet;
     
     
     private boolean gameRunning = false, gameOver = false;
@@ -25,7 +25,7 @@ public class TetrisScreen extends World
     {   
         super(17, 25, 24); 
         this.setBackground("background.png"); // Default Tetris Background
-        Greenfoot.setSpeed(50); //SEts the Speed to a reasonable Level for 60 FPS gameplay. This is Important for the frame-dependant Block falling methods.
+        Greenfoot.setSpeed(50); //Sets the Speed to a reasonable Level for 60 FPS gameplay. This is Important for the frame-dependant Block falling methods.
         addObject(structureMaker,0,0);
         showText("Press Enter to start the game.",8,12);
     }
@@ -45,6 +45,12 @@ public class TetrisScreen extends World
             structureMaker.blockFalling();
             structureMaker.playerInputs();
             
+            Tet = this;
+            checkRows();
+        }
+        
+        if (gameOver) {
+            showText("Game Over! restart the Game via UI!",8,12);
             
         }
     }
@@ -53,10 +59,63 @@ public class TetrisScreen extends World
         BlockList.add(block);
     }
     
-    public void remLine(){
-        for (Block b : BlockList) {
-            
+    
+    void checkRows() { // checks whether there exists completed rows which can be removed
+        int rows = 0;
+        int found = 0;
+        TetrisScreen world = Tet;
+        
+        for (int r = 0; r<=23; r++) { //iterate rows
+            for (int c = 0; c<=10; c++) { //iterate cols
+                java.util.List l = world.getObjectsAt(c+1, r+1, Block.class);
+                if (l.size() != 0) {
+                    found ++;
+                }
             }
+            if (found == 10) {
+                // if enough were found, nuke these
+                clearRow(rows);
+                pushDown(rows);
+            } 
+            found = 0;
+            rows ++;
+        }
+        
+    }
+    
+    
+    void clearRow(int row) {
+        TetrisScreen world = Tet;
+        for (int c = 0; c < 10; c++) {
+            world.removeObjects(world.getObjectsAt(c+1, row+1, Block.class)); // removes the blocks of a row
+        }
+    }
+    
+    void pushDown(int row) {
+        TetrisScreen world = Tet;
+        for (int r = row; r >= 0; r--) {
+            for (int c = 0; c < 10; c++) {
+                java.util.List blocks = world.getObjectsAt(c, r, Block.class);
+                if (blocks.size() > 0) {
+                    Block block = (Block) blocks.get(0);
+                    block.setLocation(block.getX(), block.getY() + 1);
+                }
+            }
+        }
+    }
+    
+    // checks whether the game has completed
+    private void checkRunning() {
+        TetrisScreen world = Tet;
+        for (int i = 0; i < 10; i++) {
+            java.util.List l = world.getObjectsAt(1+i, 1, Block.class);
+            if (l.size() >= 1) {
+                gameRunning = false;
+                Greenfoot.stop();
+                gameOver = true;
+            }
+            
+        }
     }
     
     public void pleaseAddActor(Actor a, int x, int y){
