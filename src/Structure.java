@@ -224,11 +224,10 @@ public class Structure extends Actor
                     j.setLocation(j.getX()-1, j.getY()-1);
                     l.setLocation(l.getX()+1, l.getY()+1);
                 }
-                
                 for (Block block : CurrentBlocks) {
                     if (block.orientation == 4) {
-                        block.orientation = block.orientation ++;
-                    } else { block.orientation = 1; }
+                        block.orientation = 1;
+                    } else { block.orientation = block.orientation++; }
                 }
                 
         }
