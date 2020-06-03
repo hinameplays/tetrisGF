@@ -33,7 +33,7 @@ public class TetrisScreen extends World
     public void addBlocks() {
         structureMaker.spawnStructure();
     }
-    
+      
     public void act() {
         if (Greenfoot.isKeyDown("ENTER")&& !gameOver && !gameRunning) {
             gameRunning = true;
