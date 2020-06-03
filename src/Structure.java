@@ -224,13 +224,13 @@ public class Structure extends Actor
                     j.setLocation(j.getX()-1, j.getY()-1);
                     l.setLocation(l.getX()+1, l.getY()+1);
                 }
-                for (Block block : CurrentBlocks) {
-                    if (block.orientation == 4) {
-                        block.orientation = 1;
-                    } else { block.orientation = block.orientation++; }
-                }
                 
+             
         }
+        CurrentBlocks.set(0, h);
+        CurrentBlocks.set(1, j);
+        CurrentBlocks.set(2, k);
+        CurrentBlocks.set(3, l);
     }
     
     private List<Block> getSpawnList(int StructureNumber) {
