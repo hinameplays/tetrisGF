@@ -254,20 +254,20 @@ public class Structure extends Actor
             }
         } else if (t==3) { // l block, l is root
             if(h.orientation == 1){
-                h.setLocation(h.rootX-2, h.rootY);
-                j.setLocation(j.rootX-1, j.rootY);
-                k.setLocation(k.rootX, k.rootY+1);
-                l.setLocation(l.rootX, l.rootY);
+                h.setLocation(h.rootX+1, h.rootY);
+                j.setLocation(j.rootX, j.rootY);
+                k.setLocation(k.rootX, k.rootY-1);
+                l.setLocation(l.rootX, l.rootY-2);
             } else if(h.orientation == 2){
                 h.setLocation(h.rootX, h.rootY+1);
                 j.setLocation(j.rootX, j.rootY);
                 k.setLocation(k.rootX+1, k.rootY);
                 l.setLocation(l.rootX+2, l.rootY);
             } else if(h.orientation == 3){
-                h.setLocation(h.rootX+1, h.rootY);
+                h.setLocation(h.rootX-1, h.rootY);
                 j.setLocation(j.rootX, j.rootY);
-                k.setLocation(k.rootX, k.rootY-1);
-                l.setLocation(l.rootX, l.rootY-2);
+                k.setLocation(k.rootX, k.rootY+1);
+                l.setLocation(l.rootX, l.rootY+2);
             } else if(h.orientation == 4) {
                 h.setLocation(h.rootX, h.rootY-1);
                 j.setLocation(j.rootX, j.rootY);
@@ -358,6 +358,21 @@ public class Structure extends Actor
         CurrentBlocks.set(1, j);
         CurrentBlocks.set(2, k);
         CurrentBlocks.set(3, l);
+        
+        checkLegal();
+    }
+     
+    private void checkLegal() {
+        for (Block b : CurrentBlocks) {
+            if (b.getX()>11) {
+                shiftAllLeft();
+            } else if (b.getX()<2) {
+                shiftAllRight();
+            }
+            if (b.getY()>24) {
+                //do noting yet                
+            }
+        }
     }
     
     private List<Block> getSpawnList(int StructureNumber) {

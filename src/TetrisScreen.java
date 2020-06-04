@@ -86,14 +86,13 @@ public class TetrisScreen extends World
             found = 0;
             rows ++;
         }
-        switch (deleted) {
-            case 1:
+        if (deleted == 1) {
                 c.setValue(c.getValue()+40);
-            case 2:
+        } else if (deleted == 2) {
                 c.setValue(c.getValue()+100);
-            case 3:
+        } else if (deleted == 3) {
                 c.setValue(c.getValue()+300);
-            case 4:
+        } else if (deleted == 4) {
                 c.setValue(c.getValue()+1200);
         }
         deleted = 0;
