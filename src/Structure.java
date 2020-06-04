@@ -203,145 +203,144 @@ public class Structure extends Actor
         
         int t = CurrentBlocks.get(0).type;
         
-        switch(t){
+        
             
-            case 1: // i block
+        if (t==1) { // i block
                 //depending on previous rotation, turn 90 degrees
                 //k is root -> not to be changed
-                if(h.orientation == 1){
-                    h.setLocation(h.rootX, h.rootY-2);
-                    j.setLocation(j.rootX, j.rootY-1);
-                    k.setLocation(k.rootX, k.rootY);
-                    l.setLocation(l.rootX, l.rootY+1);
-                } else if(h.orientation == 2){
-                    h.setLocation(h.rootX+2, h.rootY);
-                    j.setLocation(j.rootX+1, j.rootY);
-                    k.setLocation(k.rootX, k.rootY);
-                    l.setLocation(l.rootX-1, l.rootY);
-                } else if(h.orientation == 3){
-                    h.setLocation(h.rootX, h.rootY+2);
-                    j.setLocation(j.rootX, j.rootY+1);
-                    k.setLocation(k.rootX, k.rootY);
-                    l.setLocation(l.rootX, l.rootY-1);
-                } else if(h.orientation == 4) {
-                    h.setLocation(h.rootX-2, h.rootY);
-                    j.setLocation(j.rootX-1, j.rootY);
-                    k.setLocation(k.rootX, k.rootY);
-                    l.setLocation(l.rootX+1, l.rootY);
-                }
-                
-            case 2: // j block, j is root
-                if(h.orientation == 1){
-                    h.setLocation(h.rootX+1, h.rootY);
-                    j.setLocation(j.rootX, j.rootY);
-                    k.setLocation(k.rootX, k.rootY+1);
-                    l.setLocation(l.rootX, l.rootY+2);
-                } else if(h.orientation == 2){
-                    h.setLocation(h.rootX, h.rootY+1);
-                    j.setLocation(j.rootX, j.rootY);
-                    k.setLocation(k.rootX-1, k.rootY);
-                    l.setLocation(l.rootX-2, l.rootY);
-                } else if(h.orientation == 3){
-                    h.setLocation(h.rootX-1, h.rootY);
-                    j.setLocation(j.rootX, j.rootY);
-                    k.setLocation(k.rootX, k.rootY-1);
-                    l.setLocation(l.rootX, l.rootY-2);
-                } else if(h.orientation == 4) {
-                    h.setLocation(h.rootX, h.rootY-1);
-                    j.setLocation(j.rootX, j.rootY);
-                    k.setLocation(k.rootX+1, k.rootY);
-                    l.setLocation(l.rootX+2, l.rootY);
-                }
-            case 3: // l block, l is root
-                if(h.orientation == 1){
-                    h.setLocation(h.rootX-1, h.rootY);
-                    j.setLocation(j.rootX, j.rootY);
-                    k.setLocation(k.rootX, k.rootY+1);
-                    l.setLocation(l.rootX, l.rootY);
-                } else if(h.orientation == 2){
-                    h.setLocation(h.rootX, h.rootY+1);
-                    j.setLocation(j.rootX, j.rootY);
-                    k.setLocation(k.rootX+1, k.rootY);
-                    l.setLocation(l.rootX+2, l.rootY);
-                } else if(h.orientation == 3){
-                    h.setLocation(h.rootX+1, h.rootY);
-                    j.setLocation(j.rootX, j.rootY);
-                    k.setLocation(k.rootX, k.rootY-1);
-                    l.setLocation(l.rootX, l.rootY-2);
-                } else if(h.orientation == 4) {
-                    h.setLocation(h.rootX, h.rootY-1);
-                    j.setLocation(j.rootX, j.rootY);
-                    k.setLocation(k.rootX-1, k.rootY);
-                    l.setLocation(l.rootX-2, l.rootY);
-                }
-            case 5: // s block, h is root
-                if(h.orientation == 1){
-                    h.setLocation(h.rootX, h.rootY);
-                    j.setLocation(j.rootX, j.rootY+1);
-                    k.setLocation(k.rootX-1, k.rootY-1);
-                    l.setLocation(l.rootX-1, l.rootY);
-                } else if(h.orientation == 2){
-                    h.setLocation(h.rootX, h.rootY);
-                    j.setLocation(j.rootX-1, j.rootY);
-                    k.setLocation(k.rootX+1, k.rootY-1);
-                    l.setLocation(l.rootX, l.rootY-1);
-                } else if(h.orientation == 3){
-                    h.setLocation(h.rootX, h.rootY);
-                    j.setLocation(j.rootX, j.rootY-1);
-                    k.setLocation(k.rootX+1, k.rootY+1);
-                    l.setLocation(l.rootX+1, l.rootY);
-                } else if(h.orientation == 4) {
-                    h.setLocation(h.rootX, h.rootY);
-                    j.setLocation(j.rootX+1, j.rootY);
-                    k.setLocation(k.rootX-1, k.rootY+1);
-                    l.setLocation(l.rootX, l.rootY+1);
-                }
-            case 6: // t block, l is root
-                if(h.orientation == 1){
-                    h.setLocation(h.rootX+1, h.rootY);
-                    j.setLocation(j.rootX, j.rootY+1);
-                    k.setLocation(k.rootX, k.rootY-1);
-                    l.setLocation(l.rootX, l.rootY);
-                } else if(h.orientation == 2){
-                    h.setLocation(h.rootX, h.rootY+1);
-                    j.setLocation(j.rootX-1, j.rootY);
-                    k.setLocation(k.rootX+1, k.rootY);
-                    l.setLocation(l.rootX, l.rootY);
-                } else if(h.orientation == 3){
-                    h.setLocation(h.rootX-1, h.rootY);
-                    j.setLocation(j.rootX, j.rootY-1);
-                    k.setLocation(k.rootX, k.rootY+1);
-                    l.setLocation(l.rootX, l.rootY);
-                } else if(h.orientation == 4) {
-                    h.setLocation(h.rootX, h.rootY-1);
-                    j.setLocation(j.rootX+1, j.rootY);
-                    k.setLocation(k.rootX-1, k.rootY);
-                    l.setLocation(l.rootX, l.rootY);
-                }
-            case 7: // z block, l is root
-                if(h.orientation == 1){
-                    h.setLocation(h.rootX-1, h.rootY);
-                    j.setLocation(j.rootX-1, j.rootY+1);
-                    k.setLocation(k.rootX, k.rootY-1);
-                    l.setLocation(l.rootX, l.rootY);
-                } else if(h.orientation == 2){
-                    h.setLocation(h.rootX, h.rootY-1);
-                    j.setLocation(j.rootX-1, j.rootY-1);
-                    k.setLocation(k.rootX+1, k.rootY);
-                    l.setLocation(l.rootX, l.rootY);
-                } else if(h.orientation == 3){
-                    h.setLocation(h.rootX+1, h.rootY);
-                    j.setLocation(j.rootX+1, j.rootY-1);
-                    k.setLocation(k.rootX, k.rootY+1);
-                    l.setLocation(l.rootX, l.rootY);
-                } else if(h.orientation == 4) {
-                    h.setLocation(h.rootX, h.rootY+1);
-                    j.setLocation(j.rootX+1, j.rootY+1);
-                    k.setLocation(k.rootX-1, k.rootY);
-                    l.setLocation(l.rootX, l.rootY);
-                }
-            default:
-                //unreachable statement to fix compiling errors :/; leave in or let die!
+            if(h.orientation == 1){
+                h.setLocation(h.rootX, h.rootY-2);
+                j.setLocation(j.rootX, j.rootY-1);
+                k.setLocation(k.rootX, k.rootY);
+                l.setLocation(l.rootX, l.rootY+1);
+            } else if(h.orientation == 2){
+                h.setLocation(h.rootX+2, h.rootY);
+                j.setLocation(j.rootX+1, j.rootY);
+                k.setLocation(k.rootX, k.rootY);
+                l.setLocation(l.rootX-1, l.rootY);
+            } else if(h.orientation == 3){
+                h.setLocation(h.rootX, h.rootY+2);
+                j.setLocation(j.rootX, j.rootY+1);
+                k.setLocation(k.rootX, k.rootY);
+                l.setLocation(l.rootX, l.rootY-1);
+            } else if(h.orientation == 4) {
+                h.setLocation(h.rootX-2, h.rootY);
+                j.setLocation(j.rootX-1, j.rootY);
+                k.setLocation(k.rootX, k.rootY);
+                l.setLocation(l.rootX+1, l.rootY);
+            }
+            
+        } else if (t==2) { // j block, j is root
+            if(h.orientation == 1){
+                h.setLocation(h.rootX+1, h.rootY);
+                j.setLocation(j.rootX, j.rootY);
+                k.setLocation(k.rootX, k.rootY+1);
+                l.setLocation(l.rootX, l.rootY+2);
+            } else if(h.orientation == 2){
+                h.setLocation(h.rootX, h.rootY+1);
+                j.setLocation(j.rootX, j.rootY);
+                k.setLocation(k.rootX-1, k.rootY);
+                l.setLocation(l.rootX-2, l.rootY);
+            } else if(h.orientation == 3){
+                h.setLocation(h.rootX-1, h.rootY);
+                j.setLocation(j.rootX, j.rootY);
+                k.setLocation(k.rootX, k.rootY-1);
+                l.setLocation(l.rootX, l.rootY-2);
+            } else if(h.orientation == 4) {
+                h.setLocation(h.rootX, h.rootY-1);
+                j.setLocation(j.rootX, j.rootY);
+                k.setLocation(k.rootX+1, k.rootY);
+                l.setLocation(l.rootX+2, l.rootY);
+            }
+        } else if (t==3) { // l block, l is root
+            if(h.orientation == 1){
+                h.setLocation(h.rootX-2, h.rootY);
+                j.setLocation(j.rootX-1, j.rootY);
+                k.setLocation(k.rootX, k.rootY+1);
+                l.setLocation(l.rootX, l.rootY);
+            } else if(h.orientation == 2){
+                h.setLocation(h.rootX, h.rootY+1);
+                j.setLocation(j.rootX, j.rootY);
+                k.setLocation(k.rootX+1, k.rootY);
+                l.setLocation(l.rootX+2, l.rootY);
+            } else if(h.orientation == 3){
+                h.setLocation(h.rootX+1, h.rootY);
+                j.setLocation(j.rootX, j.rootY);
+                k.setLocation(k.rootX, k.rootY-1);
+                l.setLocation(l.rootX, l.rootY-2);
+            } else if(h.orientation == 4) {
+                h.setLocation(h.rootX, h.rootY-1);
+                j.setLocation(j.rootX, j.rootY);
+                k.setLocation(k.rootX-1, k.rootY);
+                l.setLocation(l.rootX-2, l.rootY);
+            }
+            //condition four (o block) is jumped, because turning doesn't yield anything
+        } else if (t==5) { // s block, h is root
+            if(h.orientation == 1){
+                h.setLocation(h.rootX, h.rootY);
+                j.setLocation(j.rootX, j.rootY+1);
+                k.setLocation(k.rootX-1, k.rootY-1);
+                l.setLocation(l.rootX-1, l.rootY);
+            } else if(h.orientation == 2){
+                h.setLocation(h.rootX, h.rootY);
+                j.setLocation(j.rootX-1, j.rootY);
+                k.setLocation(k.rootX+1, k.rootY-1);
+                l.setLocation(l.rootX, l.rootY-1);
+            } else if(h.orientation == 3){
+                h.setLocation(h.rootX, h.rootY);
+                j.setLocation(j.rootX, j.rootY-1);
+                k.setLocation(k.rootX+1, k.rootY+1);
+                l.setLocation(l.rootX+1, l.rootY);
+            } else if(h.orientation == 4) {
+                h.setLocation(h.rootX, h.rootY);
+                j.setLocation(j.rootX+1, j.rootY);
+                k.setLocation(k.rootX-1, k.rootY+1);
+                l.setLocation(l.rootX, l.rootY+1);
+            }
+        } else if (t==6) { // t block, l is root
+            if(h.orientation == 1){
+                h.setLocation(h.rootX+1, h.rootY);
+                j.setLocation(j.rootX, j.rootY+1);
+                k.setLocation(k.rootX, k.rootY-1);
+                l.setLocation(l.rootX, l.rootY);
+            } else if(h.orientation == 2){
+                h.setLocation(h.rootX, h.rootY+1);
+                j.setLocation(j.rootX-1, j.rootY);
+                k.setLocation(k.rootX+1, k.rootY);
+                l.setLocation(l.rootX, l.rootY);
+            } else if(h.orientation == 3){
+                h.setLocation(h.rootX-1, h.rootY);
+                j.setLocation(j.rootX, j.rootY-1);
+                k.setLocation(k.rootX, k.rootY+1);
+                l.setLocation(l.rootX, l.rootY);
+            } else if(h.orientation == 4) {
+                h.setLocation(h.rootX, h.rootY-1);
+                j.setLocation(j.rootX+1, j.rootY);
+                k.setLocation(k.rootX-1, k.rootY);
+                l.setLocation(l.rootX, l.rootY);
+            }
+        } else if (t==7) { // z block, l is root
+            if(h.orientation == 1){
+                h.setLocation(h.rootX-1, h.rootY);
+                j.setLocation(j.rootX-1, j.rootY+1);
+                k.setLocation(k.rootX, k.rootY-1);
+                l.setLocation(l.rootX, l.rootY);
+            } else if(h.orientation == 2){
+                h.setLocation(h.rootX, h.rootY-1);
+                j.setLocation(j.rootX-1, j.rootY-1);
+                k.setLocation(k.rootX+1, k.rootY);
+                l.setLocation(l.rootX, l.rootY);
+            } else if(h.orientation == 3){
+                h.setLocation(h.rootX+1, h.rootY);
+                j.setLocation(j.rootX+1, j.rootY-1);
+                k.setLocation(k.rootX, k.rootY+1);
+                l.setLocation(l.rootX, l.rootY);
+            } else if(h.orientation == 4) {
+                h.setLocation(h.rootX, h.rootY+1);
+                j.setLocation(j.rootX+1, j.rootY+1);
+                k.setLocation(k.rootX-1, k.rootY);
+                l.setLocation(l.rootX, l.rootY);
+            }
         }
         if (h.orientation == 4) {
             h.orientation = 1;

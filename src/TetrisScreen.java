@@ -11,14 +11,14 @@ import java.util.*;
  */
 public class TetrisScreen extends World
 {
-    public boolean debug = true;    
-    
+    public boolean debug = false;    
+
     private boolean gameRunning = false, gameOver = false;
     private List<Block> BlockList = new ArrayList<Block>(); //Stores all static Blocks
     private Structure structureMaker = new Structure();
+    Counter c = new Counter("");
     // These Variables are used during Gameplay.
-    
-    
+
     public TetrisScreen()
     {   
         super(17, 25, 24); 
@@ -26,19 +26,23 @@ public class TetrisScreen extends World
         Greenfoot.setSpeed(50); //Sets the Speed to a reasonable Level for 60 FPS gameplay. This is Important for the frame-dependant Block falling methods.
         addObject(structureMaker,0,0);
         showText("Press Enter to start the game.",8,12);
+
+        
+        addObject(c,13,7);
+        showText("Points \n gained:",13,5);
     }
-    
+
     public void addBlocks() {
         structureMaker.spawnStructure();
     }
-      
+
     public void act() {
         if (Greenfoot.isKeyDown("ENTER")&& !gameOver && !gameRunning) {
             gameRunning = true;
             showText("",8,12); // Hides the Game Start Text
             addBlocks();
         }
-        
+
         if (gameRunning) {
             structureMaker.blockFalling();
             structureMaker.playerInputs();
@@ -48,23 +52,24 @@ public class TetrisScreen extends World
                 structureMaker.fallable = true;
                 Greenfoot.delay(2);
             }
+            checkRunning();
         }
-        
+
         if (gameOver) {
-            //showText("Game Over! restart the Game via UI!",8,12);
-            
+            showText("Game Over! restart the Game via UI!",8,12);
+
         }
     }
-    
+
     public void saveStaticBlock(Block block) {
         BlockList.add(block);
     }
-    
-    
+
     void checkRows() { // checks whether there exists completed rows which can be removed
         int rows = 0;
         int found = 0;
-        
+        int deleted = 0; //int to keep track of points awardable
+
         for (int r = 0; r<=23; r++) { //iterate rows
             for (int c = 0; c<=10; c++) { //iterate cols
                 java.util.List l = getObjectsAt(c+1, r+1, Block.class);
@@ -76,20 +81,30 @@ public class TetrisScreen extends World
                 // if enough were found, nuke these
                 clearRow(rows);
                 pushDown(rows);
+                deleted++;
             } 
             found = 0;
             rows ++;
         }
-        
+        switch (deleted) {
+            case 1:
+                c.setValue(c.getValue()+40);
+            case 2:
+                c.setValue(c.getValue()+100);
+            case 3:
+                c.setValue(c.getValue()+300);
+            case 4:
+                c.setValue(c.getValue()+1200);
+        }
+        deleted = 0;
     }
-    
-    
+
     void clearRow(int row) {
         for (int c = 0; c < 10; c++) {
             removeObjects(getObjectsAt(c+1, row+1, Block.class)); // removes the blocks of a row
         }
     }
-    
+
     void pushDown(int row) {
         for (int r = row; r >= 0; r--) {
             for (int c = 0; c < 10; c++) {
@@ -101,17 +116,18 @@ public class TetrisScreen extends World
             }
         }
     }
-    
+
     // checks whether the game has completed
     private void checkRunning() {
         for (int i = 0; i < 10; i++) {
             java.util.List l = getObjectsAt(1+i, 1, Block.class);
-            if (l.size() >= 1) {
+            if (l.size() > 1) {
                 gameRunning = false;
                 Greenfoot.stop();
                 gameOver = true;
             }
-            
+
         }
     }
+
 }
