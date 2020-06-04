@@ -375,6 +375,7 @@ public class Structure extends Actor
         }
     }
     
+    
     private List<Block> getSpawnList(int StructureNumber) {
         List<Block> BlockList = new ArrayList<Block>();
         switch (StructureNumber) { //switch  based on RNG from upward

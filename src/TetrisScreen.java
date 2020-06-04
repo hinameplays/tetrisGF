@@ -106,7 +106,7 @@ public class TetrisScreen extends World
 
     void pushDown(int row) {
         for (int r = row; r >= 0; r--) {
-            for (int c = 0; c < 10; c++) {
+            for (int c = 0; c < 11; c++) {
                 java.util.List blocks = getObjectsAt(c, r, Block.class);
                 if (blocks.size() > 0) {
                     Block block = (Block) blocks.get(0);
